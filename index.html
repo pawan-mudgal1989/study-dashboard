@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#10120f" />
+    <title>Study Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="dashboard" aria-label="Study dashboard">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark"></span>STUDY DESK</div>
+        <div class="mode" id="data-mode">DEMO MODE</div>
+        <button class="fullscreen" id="fullscreen-button" aria-label="Enter full screen">⛶</button>
+      </header>
+
+      <section class="hero" aria-label="Current date and time">
+        <time class="clock" id="clock">--:--</time>
+        <div class="date" id="date">Loading date</div>
+      </section>
+
+      <section class="content-grid">
+        <section class="card agenda-card" aria-labelledby="agenda-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">TODAY</p>
+              <h1 id="agenda-title">Your agenda</h1>
+            </div>
+            <span class="event-count" id="event-count">0 EVENTS</span>
+          </div>
+          <div class="agenda-list" id="agenda-list"></div>
+        </section>
+
+        <aside class="side-column">
+          <section class="card next-card" aria-labelledby="next-title">
+            <p class="eyebrow">UP NEXT</p>
+            <h2 id="next-title" class="next-title">Nothing scheduled</h2>
+            <p class="next-meta" id="next-meta">Enjoy the open time.</p>
+            <div class="countdown" id="countdown">—</div>
+          </section>
+
+          <section class="card weather-card" aria-labelledby="weather-title">
+            <div class="weather-topline"><p class="eyebrow" id="weather-title">WEATHER</p><span id="weather-location">Delhi</span></div>
+            <div class="weather-main"><span class="weather-icon" id="weather-icon">☀</span><strong id="temperature">28°</strong></div>
+            <p class="weather-summary" id="weather-summary">Clear skies</p>
+            <p class="weather-range" id="weather-range">HIGH 30° &nbsp; LOW 25°</p>
+          </section>
+        </aside>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

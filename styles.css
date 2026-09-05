@@ -1,0 +1,53 @@
+:root {
+  --ink: #e9ede2;
+  --muted: #a8afa1;
+  --panel: #1a1d18;
+  --line: rgba(233, 237, 226, .12);
+  --accent: #c8e66b;
+  --work: #8bb8ff;
+  --personal: #e6a6ca;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; margin: 0; }
+body { background: #10120f; color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.dashboard { min-height: 100vh; padding: 2.4vh clamp(28px, 4vw, 76px) 3.4vh; display: flex; flex-direction: column; background: radial-gradient(ellipse 80% 65% at 75% -15%, #2b3421 0%, transparent 62%), #10120f; }
+.topbar { display: flex; align-items: center; min-height: 34px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .14em; }
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand-mark { display: inline-block; width: 9px; height: 9px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 16px rgba(200,230,107,.6); }
+.mode { margin-left: auto; color: #cad3b8; border: 1px solid var(--line); padding: 6px 9px; border-radius: 99px; font-size: 9px; }
+.fullscreen { margin-left: 12px; color: var(--muted); border: 0; background: none; font-size: 21px; cursor: pointer; padding: 3px; }
+.hero { padding: 4vh 0 3.8vh; text-align: center; }
+.clock { display: block; font-size: clamp(76px, 11.5vw, 174px); font-weight: 320; letter-spacing: -.075em; line-height: .87; font-variant-numeric: tabular-nums; }
+.date { color: var(--muted); font-size: clamp(14px, 1.55vw, 21px); margin-top: 2.2vh; letter-spacing: .015em; }
+.content-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(250px, .76fr); gap: 18px; flex: 1; min-height: 0; }
+.card { background: rgba(26,29,24,.84); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+.agenda-card { padding: clamp(18px, 2.5vw, 34px); }
+.section-heading { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 13px; border-bottom: 1px solid var(--line); }
+.eyebrow { margin: 0 0 6px; color: var(--accent); font-size: 10px; line-height: 1; font-weight: 800; letter-spacing: .16em; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 0; font-size: clamp(20px, 2.1vw, 29px); letter-spacing: -.035em; }
+.event-count { color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .1em; padding-top: 4px; }
+.agenda-list { display: grid; }
+.event { display: grid; grid-template-columns: 78px 11px minmax(0, 1fr); gap: 13px; align-items: center; padding: clamp(12px, 1.6vh, 22px) 0; border-bottom: 1px solid var(--line); }
+.event:last-child { border-bottom: 0; padding-bottom: 0; }
+.event-time { font-size: clamp(15px, 1.55vw, 21px); font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.event-dot { height: 9px; width: 9px; border-radius: 999px; background: var(--work); }
+.event.personal .event-dot { background: var(--personal); }
+.event-title { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 680; font-size: clamp(14px, 1.5vw, 20px); letter-spacing: -.02em; }
+.event-source { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .07em; }
+.side-column { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
+.next-card, .weather-card { padding: clamp(20px, 2.6vw, 34px); display: flex; flex-direction: column; }
+.next-title { font-size: clamp(22px, 2.35vw, 33px); line-height: 1.05; letter-spacing: -.055em; margin: 5px 0 10px; }
+.next-meta, .weather-summary { color: var(--muted); margin-bottom: 0; font-size: clamp(12px, 1.2vw, 16px); }
+.countdown { margin-top: auto; color: var(--accent); font-size: clamp(18px, 1.9vw, 28px); font-weight: 650; letter-spacing: -.045em; }
+.weather-topline { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
+.weather-main { display: flex; align-items: center; gap: 13px; margin: auto 0 0; }
+.weather-icon { font-size: clamp(36px, 4vw, 58px); }
+.weather-main strong { font-size: clamp(42px, 5.1vw, 76px); line-height: .8; font-weight: 350; letter-spacing: -.08em; }
+.weather-range { color: var(--muted); margin: 14px 0 0; font-size: 10px; font-weight: 750; letter-spacing: .12em; }
+@media (max-width: 650px), (orientation: portrait) {
+  .dashboard { padding: 18px; }
+  .clock { font-size: 76px; }
+  .content-grid { grid-template-columns: 1fr; }
+  .side-column { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+}
