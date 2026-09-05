@@ -1,54 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#10120f" />
-    <title>Study Dashboard</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="dashboard" aria-label="Study dashboard">
-      <header class="topbar">
-        <div class="brand"><span class="brand-mark"></span>STUDY DESK</div>
-        <div class="mode" id="data-mode">DEMO MODE</div>
-        <button class="fullscreen" id="fullscreen-button" aria-label="Enter full screen">⛶</button>
-      </header>
-
-      <section class="hero" aria-label="Current date and time">
-        <time class="clock" id="clock">--:--</time>
-        <div class="date" id="date">Loading date</div>
-      </section>
-
-      <section class="content-grid">
-        <section class="card agenda-card" aria-labelledby="agenda-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">TODAY</p>
-              <h1 id="agenda-title">Your agenda</h1>
-            </div>
-            <span class="event-count" id="event-count">0 EVENTS</span>
-          </div>
-          <div class="agenda-list" id="agenda-list"></div>
-        </section>
-
-        <aside class="side-column">
-          <section class="card next-card" aria-labelledby="next-title">
-            <p class="eyebrow">UP NEXT</p>
-            <h2 id="next-title" class="next-title">Nothing scheduled</h2>
-            <p class="next-meta" id="next-meta">Enjoy the open time.</p>
-            <div class="countdown" id="countdown">—</div>
-          </section>
-
-          <section class="card weather-card" aria-labelledby="weather-title">
-            <div class="weather-topline"><p class="eyebrow" id="weather-title">WEATHER</p><span id="weather-location">Delhi</span></div>
-            <div class="weather-main"><span class="weather-icon" id="weather-icon">☀</span><strong id="temperature">28°</strong></div>
-            <p class="weather-summary" id="weather-summary">Clear skies</p>
-            <p class="weather-range" id="weather-range">HIGH 30° &nbsp; LOW 25°</p>
-          </section>
-        </aside>
-      </section>
-    </main>
-    <script src="app.js"></script>
-  </body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><meta name="theme-color" content="#10120f"><title>Study Dashboard</title><link rel="stylesheet" href="styles.css"></head><body><main class="dashboard"><header class="topbar"><div class="brand"><i></i>STUDY DESK</div><nav class="page-nav"><button class="active" data-page="0" aria-label="Home"></button><button data-page="1" aria-label="Agenda"></button><button data-page="2" aria-label="Focus"></button><button data-page="3" aria-label="Status"></button></nav><div class="mode">DEMO MODE</div><button class="fullscreen" id="fullscreen-button">⛶</button></header><div class="pager" id="pager">
+<section class="page home"><div class="hero"><time id="clock">--:--</time><div id="date">Loading date</div></div><div class="home-grid"><section class="card agenda"><div class="heading"><div><p>TODAY</p><h1>Your agenda</h1></div><span id="event-count"></span></div><div id="home-agenda"></div></section><aside><section class="card next"><p>UP NEXT</p><h2 id="next-title">Nothing scheduled</h2><span id="next-meta"></span><strong id="countdown">—</strong></section><section class="card weather"><div><p>WEATHER</p><span>Delhi</span></div><b>☀ <strong>28°</strong></b><span>Clear skies</span><small>HIGH 30° &nbsp; LOW 25°</small></section></aside></div></section>
+<section class="page"><div class="page-title"><p>AGENDA</p><h1>Today, at a glance</h1><span>Work and personal commitments, kept separate but seen together.</span></div><section class="card full-agenda" id="full-agenda"></section><div class="legend"><span><i></i>Work · Outlook</span><span><i></i>Personal · Google</span></div></section>
+<section class="page focus"><div class="focus-copy"><p>FOCUS</p><h1>One thing<br>at a time.</h1><span>Choose a gentle, single-session intention. It stays deliberately out of your way.</span><label><i></i><input aria-label="Focus intention" value="Deep work"></label></div><section class="timer"><p id="timer-label">READY FOR FOCUS</p><time id="focus-time">25:00</time><button id="timer-button">START SESSION</button><button id="timer-reset">RESET</button></section></section>
+<section class="page"><div class="page-title"><p>STATUS</p><h1>Your desk, quietly ready.</h1><span>Simple signals only—no controls or distractions.</span></div><div class="status-grid"><article class="card"><i></i><p>CALENDARS</p><h2>Demo data is on</h2><span>Work and personal remain safely unconnected in this prototype.</span></article><article class="card"><i></i><p>WEATHER</p><h2>Delhi · Clear</h2><span>28° now · High 30° · Low 25°</span></article><article class="card muted"><i></i><p>NEXT STEP</p><h2>Private calendar link</h2><span>Add this later through a private OAuth-enabled service—not this tablet page.</span></article></div></section></div><footer>SWIPE TO EXPLORE</footer></main><script src="app.js"></script></body></html>
