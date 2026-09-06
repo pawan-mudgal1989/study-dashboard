@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07121d" />
     <title>Focus Dashboard</title>
-    <link rel="stylesheet" href="styles.css?v=cinematic-home-v2" />
+    <link rel="stylesheet" href="styles.css?v=cinematic-home-v3" />
   </head>
   <body>
     <main class="dashboard" aria-label="Focus dashboard">
@@ -28,7 +28,11 @@
             <section class="glass-card weather-card" aria-label="Weather in New Delhi">
               <div class="weather-title"><span class="pin" aria-hidden="true">⌖</span><span>New Delhi</span><small>Clear Sky</small></div>
               <div class="weather-main">
-                <div class="sun" aria-hidden="true"><b></b></div>
+                <svg class="sun-icon" viewBox="0 0 120 120" aria-hidden="true">
+                  <defs><radialGradient id="sunGlow"><stop stop-color="#ffe798"/><stop offset=".72" stop-color="#ffd15c"/><stop offset="1" stop-color="#f6b93e"/></radialGradient></defs>
+                  <g stroke="#ffd15c" stroke-width="5" stroke-linecap="round" opacity=".95"><path d="M60 8v14"/><path d="M60 98v14"/><path d="M8 60h14"/><path d="M98 60h14"/><path d="m23 23 10 10"/><path d="m87 87 10 10"/><path d="m97 23-10 10"/><path d="m33 87-10 10"/></g>
+                  <circle cx="60" cy="60" r="30" fill="url(#sunGlow)"/><circle cx="50" cy="49" r="14" fill="#fff2bd" opacity=".18"/>
+                </svg>
                 <div><strong>28°C</strong><p>Feels like 30°</p></div>
                 <dl><div><dt>H</dt><dd>30°</dd></div><div><dt>L</dt><dd>24°</dd></div><div><dt>AQI</dt><dd>78</dd></div><div><dt>Good</dt><dd class="status-dot"></dd></div></dl>
               </div>
@@ -50,6 +54,6 @@
       <button class="fullscreen-toggle" id="fullscreenButton" type="button" aria-label="Enter full screen" title="Full screen">⛶</button>
       <div class="screen-pagination" aria-label="Screen navigation"><button class="active" aria-label="Home screen"></button><button aria-label="Next screen"></button></div>
     </main>
-    <script src="app.js?v=cinematic-home-v2"></script>
+    <script src="app.js?v=cinematic-home-v3"></script>
   </body>
 </html>

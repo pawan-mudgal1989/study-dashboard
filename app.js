@@ -24,7 +24,8 @@ function renderCalendar() {
   const daysThisMonth = new Date(year, month + 1, 0).getDate();
   const daysPreviousMonth = new Date(year, month, 0).getDate();
   calendarGrid.innerHTML = '';
-  for (let cell = 0; cell < 42; cell++) {
+  const totalCells = start + daysThisMonth > 35 ? 42 : 35;
+  for (let cell = 0; cell < totalCells; cell++) {
     const day = cell - start + 1;
     const label = document.createElement('time');
     if (day < 1) { label.textContent = daysPreviousMonth + day; label.className = 'outside'; }
