@@ -87,3 +87,28 @@ async function refreshLiveWeather(){try{const weatherUrl='https://api.open-meteo
 cityLabel.textContent=activeLocation.name;
 if(activeLocation.name==='New Delhi'){const locationButton=document.createElement('button');locationButton.type='button';locationButton.textContent='⌖';locationButton.title='Use my location';locationButton.style.cssText='margin-left:auto;border:0;background:transparent;color:inherit;font:inherit;font-size:18px;cursor:pointer;padding:0 2px';weatherTitle.append(locationButton);locationButton.addEventListener('click',()=>navigator.geolocation?.getCurrentPosition(({coords})=>{activeLocation={lat:coords.latitude,lon:coords.longitude,name:'Your location'};localStorage.setItem('focus-dashboard-location',JSON.stringify(activeLocation));cityLabel.textContent=activeLocation.name;locationButton.remove();refreshLiveWeather()},()=>weatherCondition.textContent='Location permission denied',{maximumAge:900000,timeout:10000}))}
 refreshLiveWeather();setInterval(refreshLiveWeather,1200000);
+
+;(() => {
+  const title = document.querySelector('.weather-title');
+  const compass = title && title.querySelector('.pin');
+  if (compass) compass.textContent = '🧭';
+  const label = title && title.querySelectorAll('span')[1];
+  async function nameCurrentPlace(coords) {
+    const url = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + encodeURIComponent(coords.latitude) + '&longitude=' + encodeURIComponent(coords.longitude) + '&localityLanguage=en';
+    const response = await fetch(url);
+    if (!response.ok) return;
+    const place = await response.json();
+    const name = place.city || place.locality || place.principalSubdivision;
+    if (!name) return;
+    activeLocation = { lat: coords.latitude, lon: coords.longitude, name: name };
+    localStorage.setItem('focus-dashboard-location', JSON.stringify(activeLocation));
+    if (label) label.textContent = name;
+  }
+  const locationButton = title && title.querySelector('button');
+  locationButton && locationButton.addEventListener('click', () => {
+    navigator.geolocation && navigator.geolocation.getCurrentPosition(({ coords }) => nameCurrentPlace(coords));
+  });
+  if (activeLocation && activeLocation.name === 'Your location') {
+    navigator.geolocation && navigator.geolocation.getCurrentPosition(({ coords }) => nameCurrentPlace(coords));
+  }
+})();
