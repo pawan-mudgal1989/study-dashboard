@@ -50,4 +50,16 @@ window.addEventListener('keydown', event => { if (event.key === 'ArrowRight') se
 track.addEventListener('pointerdown', event => { startX = event.clientX; });
 track.addEventListener('pointerup', event => { if (Math.abs(event.clientX - startX) > 60) setScreen(activeScreen + (event.clientX < startX ? 1 : -1)); });
 
+const fullscreenButton = document.querySelector('#fullscreenButton');
+async function toggleFullscreen() {
+  if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+  else await document.exitFullscreen?.();
+}
+fullscreenButton.addEventListener('click', toggleFullscreen);
+document.addEventListener('fullscreenchange', () => {
+  const active = Boolean(document.fullscreenElement);
+  fullscreenButton.setAttribute('aria-label', active ? 'Exit full screen' : 'Enter full screen');
+  fullscreenButton.title = active ? 'Exit full screen' : 'Full screen';
+});
+
 updateClock(); renderCalendar(); setInterval(updateClock, 1000);
