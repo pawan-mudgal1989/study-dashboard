@@ -1,1 +1,53 @@
-const events=[{hour:9,minute:30,title:'Stand-up',source:'Work · Outlook',type:'work'},{hour:11,minute:0,title:'Architecture Review',source:'Work · Outlook',type:'work'},{hour:14,minute:30,title:'Deep Work',source:'Work · Outlook',type:'work'},{hour:18,minute:0,title:'Dinner',source:'Personal · Google',type:'personal'},{hour:20,minute:0,title:'Gym',source:'Personal · Google',type:'personal'}];const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0'),dateFor=(e,n)=>new Date(n.getFullYear(),n.getMonth(),n.getDate(),e.hour,e.minute),time=d=>new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(d);function row(e){return `<div class="event ${e.type}"><time>${time(dateFor(e,new Date()))}</time><i></i><div><b>${e.title}</b><small>${e.source}</small></div></div>`}function clock(){let n=new Date(),ds=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(n),v=`${pad(n.getHours())}:${pad(n.getMinutes())}`;$('#clock').textContent=v;$('#focus-clock').textContent=v;$('#date').textContent=ds;$('#focus-date').textContent=ds;let e=events.map(x=>({...x,d:dateFor(x,n)})).find(x=>x.d>n),m=Math.max(1,Math.ceil((e.d-n)/60000)),cd=m<60?`IN ${m} MIN`:`IN ${m/60|0}H ${m%60}M`;$('#next-title').textContent=e.title;$('#next-detail').textContent=`${time(e.d)} – ${time(new Date(e.d.getTime()+3600000))} · ${e.source}`;$('#countdown').textContent=cd;$('#focus-title').textContent=e.title;$('#focus-countdown').textContent=`starts in ${m} min`}$('#work-events').innerHTML=events.filter(e=>e.type==='work').map(row).join('');$('#personal-events').innerHTML=events.filter(e=>e.type==='personal').map(row).join('');let p=0,pages=$('#pages'),buttons=[...document.querySelectorAll('nav button')],dots=$('#dots');function go(n){p=Math.max(0,Math.min(4,n));pages.style.transform=`translateX(-${p*20}%)`;buttons.forEach((b,i)=>b.classList.toggle('active',i===p));[...dots.children].forEach((b,i)=>b.classList.toggle('active',i===p))}buttons.forEach((b,i)=>b.onclick=()=>go(i));buttons.forEach((_,i)=>{let b=document.createElement('button');b.onclick=()=>go(i);dots.append(b)});go(0);let x;pages.ontouchstart=e=>x=e.changedTouches[0].screenX;pages.ontouchend=e=>{let d=e.changedTouches[0].screenX-x;if(Math.abs(d)>55)go(p+(d<0?1:-1))};$('#full').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();clock();setInterval(clock,1000);
+const timeEl = document.querySelector('#time');
+const meridiemEl = document.querySelector('#meridiem');
+const dateEl = document.querySelector('#date');
+const monthTitle = document.querySelector('#monthTitle');
+const calendarGrid = document.querySelector('#calendarGrid');
+const now = new Date();
+let calendarDate = new Date(now.getFullYear(), now.getMonth(), 1);
+
+function updateClock() {
+  const date = new Date();
+  const hour = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  timeEl.textContent = `${String(hour % 12 || 12).padStart(2, '0')}:${minutes}`;
+  meridiemEl.textContent = hour >= 12 ? 'PM' : 'AM';
+  dateEl.textContent = new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }).format(date);
+}
+
+function renderCalendar() {
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  monthTitle.textContent = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(calendarDate);
+  const firstDay = new Date(year, month, 1);
+  const start = (firstDay.getDay() + 6) % 7;
+  const daysThisMonth = new Date(year, month + 1, 0).getDate();
+  const daysPreviousMonth = new Date(year, month, 0).getDate();
+  calendarGrid.innerHTML = '';
+  for (let cell = 0; cell < 42; cell++) {
+    const day = cell - start + 1;
+    const label = document.createElement('time');
+    if (day < 1) { label.textContent = daysPreviousMonth + day; label.className = 'outside'; }
+    else if (day > daysThisMonth) { label.textContent = day - daysThisMonth; label.className = 'outside'; }
+    else {
+      label.textContent = day;
+      label.dateTime = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      if (year === now.getFullYear() && month === now.getMonth() && day === now.getDate()) label.className = 'today';
+    }
+    calendarGrid.append(label);
+  }
+}
+
+document.querySelector('#previousMonth').addEventListener('click', () => { calendarDate.setMonth(calendarDate.getMonth() - 1); renderCalendar(); });
+document.querySelector('#nextMonth').addEventListener('click', () => { calendarDate.setMonth(calendarDate.getMonth() + 1); renderCalendar(); });
+
+let activeScreen = 0, startX = 0;
+const track = document.querySelector('#screenTrack');
+const dots = [...document.querySelectorAll('.screen-pagination button')];
+function setScreen(index) { activeScreen = Math.max(0, Math.min(1, index)); track.style.transform = `translateX(-${activeScreen * 100}%)`; dots.forEach((dot, i) => dot.classList.toggle('active', i === activeScreen)); }
+dots.forEach((dot, i) => dot.addEventListener('click', () => setScreen(i)));
+window.addEventListener('keydown', event => { if (event.key === 'ArrowRight') setScreen(activeScreen + 1); if (event.key === 'ArrowLeft') setScreen(activeScreen - 1); });
+track.addEventListener('pointerdown', event => { startX = event.clientX; });
+track.addEventListener('pointerup', event => { if (Math.abs(event.clientX - startX) > 60) setScreen(activeScreen + (event.clientX < startX ? 1 : -1)); });
+
+updateClock(); renderCalendar(); setInterval(updateClock, 1000);

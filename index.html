@@ -1,6 +1,55 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Study Dashboard</title><link rel="stylesheet" href="styles.css"></head><body><main><header><b><i></i>STUDY DESK</b><nav><button class="active">Home</button><button>Agenda</button><button>Focus</button><button>Tasks</button><button>Status</button></nav><small>DEMO MODE</small><button id="full">⛶</button></header><div id="pages">
-<section class="page home"><time id="clock">--:--</time><div id="date">Loading date</div><article class="weather"><span>WEATHER</span><strong>☀ 28°</strong><em>New Delhi · Clear</em></article><div class="next"><span>NEXT EVENT</span><h1 id="next-title">Architecture Review</h1><p id="next-detail">11:00 AM – 12:00 PM · Work · Outlook</p><b id="countdown">IN 18 MIN</b></div></section>
-<section class="page agenda"><div class="title"><span>AGENDA</span><h1>Today</h1><p>Sunday, 6 September</p></div><div class="agenda-grid"><article><span>WORK · OUTLOOK</span><div id="work-events"></div></article><article><span>PERSONAL · GOOGLE</span><div id="personal-events"></div></article></div></section>
-<section class="page focus"><time id="focus-clock">--:--</time><div id="focus-date">Sunday, 6 September</div><div class="focus-next"><span>NEXT</span><h1 id="focus-title">Architecture Review</h1><p id="focus-countdown">starts in 18 min</p></div><p class="focus-weather">28° &nbsp;·&nbsp; Clear · New Delhi</p></section>
-<section class="page tasks"><div class="title"><span>TASKS</span><h1>Small list. Clear mind.</h1><p>Only what needs attention today.</p></div><div class="tasks-grid"><article><span>WORK</span><label><input type="checkbox"> Review architecture notes</label><label><input type="checkbox"> Send project update</label><label><input type="checkbox"> Prepare tomorrow's priorities</label></article><article><span>PERSONAL</span><label><input type="checkbox"> Pick up dry cleaning</label><label><input type="checkbox"> Book gym session</label><label><input type="checkbox"> Plan dinner</label></article></div></section>
-<section class="page status"><div class="title"><span>STATUS</span><h1>Everything in its place.</h1><p>Quiet signals from the desk.</p></div><div class="status-grid"><article><i></i><span>WEATHER</span><h2>☀ 28°</h2><p>Clear · 30° / 24°</p></article><article><i></i><span>TABLET</span><h2>87%</h2><p>Charging</p></article><article><i></i><span>NETWORK</span><h2>Wi-Fi</h2><p>Internet connected</p></article><article><i></i><span>MAC</span><h2>Online</h2><p>Demo status</p></article><article class="muted"><i></i><span>CALENDARS</span><h2>Demo data</h2><p>Secure connection later</p></article></div></section></div><footer id="dots"></footer></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07121d" />
+    <title>Focus Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="dashboard" aria-label="Focus dashboard">
+      <div class="background" aria-hidden="true"></div>
+      <div class="shade" aria-hidden="true"></div>
+
+      <div class="screen-track" id="screenTrack">
+        <section class="screen home-screen" aria-label="Home screen">
+          <section class="focus-copy" aria-label="Date and motivation">
+            <p class="eyebrow">A focused mind<br />builds an extraordinary life.</p>
+            <span class="accent-line"></span>
+            <div class="time-row"><time id="time">10:42</time><span id="meridiem">PM</span></div>
+            <p class="date" id="date">Sunday, 6 September</p>
+            <blockquote>“A focused mind<br />builds an extraordinary life.”</blockquote>
+            <span class="accent-line quote-line"></span>
+            <p class="values">Focus <i></i> Discipline <i></i> Progress</p>
+          </section>
+
+          <aside class="widgets" aria-label="Weather and calendar">
+            <section class="glass-card weather-card" aria-label="Weather in New Delhi">
+              <div class="weather-title"><span class="pin" aria-hidden="true">⌖</span><span>New Delhi</span><small>Clear Sky</small></div>
+              <div class="weather-main">
+                <div class="sun" aria-hidden="true"><b></b></div>
+                <div><strong>28°C</strong><p>Feels like 30°</p></div>
+                <dl><div><dt>H</dt><dd>30°</dd></div><div><dt>L</dt><dd>24°</dd></div><div><dt>AQI</dt><dd>78</dd></div><div><dt>Good</dt><dd class="status-dot"></dd></div></dl>
+              </div>
+            </section>
+
+            <section class="glass-card calendar-card" aria-label="September 2026 calendar">
+              <header><h1 id="monthTitle">September 2026</h1><div class="month-actions"><button type="button" id="previousMonth" aria-label="Previous month">‹</button><button type="button" id="nextMonth" aria-label="Next month">›</button></div></header>
+              <div class="calendar-weekdays" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+              <div class="calendar-grid" id="calendarGrid"></div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="screen future-screen" aria-label="Future screen placeholder">
+          <p>Next screen</p><span>Ready for the next view.</span>
+        </section>
+      </div>
+
+      <div class="screen-pagination" aria-label="Screen navigation"><button class="active" aria-label="Home screen"></button><button aria-label="Next screen"></button></div>
+      <p class="swipe-hint">Swipe to explore</p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
